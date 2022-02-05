@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+	<link rel="stylesheet" href="style.css"/>
+
+	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="swiper">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide box">Hej!</div>
+				<div class="swiper-slide box">Hallo du!</div>
+				<div class="swiper-slide box">Jo genau.</div>
+				<div class="swiper-slide box">Moin alter!</div>
+				<div class="swiper-slide box">Servus :)</div>
+				<div class="swiper-slide box">Hey du.</div>
+			</div>
+		</div>
+	</div>
+	<br><br>
+	<button onclick="initEvent()">Start Magic 🪄</button>
+
+	<script>
+		const swiper = new Swiper('.swiper', {
+			direction: 'horizontal',
+			centeredSlides: true,
+			initialSlide: 3,
+			spaceBetween: 24,
+			effect: 'coverflow',
+			coverflowEffect: {
+				slideShadows: false,
+				scale: 0.85,
+				rotate: 0,
+			}
+		})
+
+		const clamp = (number, min, max) => Math.max(min, Math.min(number, max))
+
+		const initEvent = async () => {
+			if (typeof window.DeviceOrientationEvent === 'undefined') {
+				alert('event undefined')
+				return
+			}
+
+			// Request permission when needed
+			if (typeof window.DeviceOrientationEvent.requestPermission === 'function') {
+				const permissionRes = await DeviceOrientationEvent.requestPermission()
+				if (permissionRes !== 'granted') {
+					alert('No permission granted')
+					return
+				}
+			}
+
+			window.addEventListener("deviceorientation", (event) => {
+				let frontToBack = event.beta
+				let leftToRight = event.gamma
+				let rotateX = clamp((45 - frontToBack) * -1, -35, 35) / 2
+				let rotateY = clamp(leftToRight * -1, -35, 35) / 2
+				document.querySelector('.wrapper').style.transform = `perspective(200px) rotateX(${ rotateX }deg) rotateY(${ rotateY }deg)`
+			}, true)
+		}
+	</script>  
+</body>
+</html>

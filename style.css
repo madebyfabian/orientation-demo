@@ -1,0 +1,45 @@
+body {
+	overflow: hidden;
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.wrapper {
+	width: 200px;
+	height: 275px;
+	margin: 20vh auto;
+	overflow-x: visible;
+}
+
+.box {
+	min-width: 200px;
+	height: 100%;
+	background-color: #f7f7f8;
+	border-radius: 16px;
+	font-size: 24px;
+	font-weight: bold;
+	font-family: sans-serif;
+	padding: 40px;
+	flex: 1;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+
+.swiper {
+  width: 100%;
+  height: 100%;
+	overflow: visible;
+}
+
+.swiper-slide {
+  padding-left: 30px;
+	padding-right: 30px;
+}
